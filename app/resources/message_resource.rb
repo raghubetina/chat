@@ -8,6 +8,8 @@ class MessageResource < ApplicationResource
 
   # Direct associations
 
+  belongs_to :topic
+
   belongs_to :user
 
   # Indirect associations

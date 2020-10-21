@@ -7,6 +7,8 @@ class TopicResource < ApplicationResource
 
   # Direct associations
 
+  has_many   :messages
+
   belongs_to :room
 
   # Indirect associations
