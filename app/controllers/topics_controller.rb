@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
 
   # GET /topics
   def index
-    @topics = Topic.all
+    @topics = Topic.page(params[:page]).per(10)
   end
 
   # GET /topics/1
