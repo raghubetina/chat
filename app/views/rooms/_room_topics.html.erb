@@ -10,24 +10,18 @@
   <ul class="list-group list-group-flush">
     <% @room.topics.each do |topic| %>
       <li class="list-group-item d-flex align-items-center justify-content-between">
-        <!-- Show link start -->
         <%= link_to topic, topic_path(topic) %>
-        <!-- Show link end -->
 
-        <!-- Delete link start -->
         <%= link_to topic, method: :delete, data: { confirm: "Do you really want to delete this topic" } do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
-        <!-- Delete link end -->
 
       </li>
     <% end %>
 
     <div class="card-footer">
       <div class="collapse" id="room_topics_new_form">
-        <!-- New associationcollection form start -->
         <%= render partial: "rooms/room_topics_new_form" %>
-        <!-- New associationcollection form end -->
       </div>
     </div>
 
