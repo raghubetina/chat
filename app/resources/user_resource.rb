@@ -6,7 +6,14 @@ class UserResource < ApplicationResource
 
   # Direct associations
 
-  has_many :messages
+  has_many   :memberships
+
+  has_many   :rooms,
+             foreign_key: :creator_id
+
+  has_many   :messages
 
   # Indirect associations
+
+  many_to_many :teams
 end

@@ -1,5 +1,5 @@
 ActiveAdmin.register Room do
-  permit_params :name, :open_to_public
+  permit_params :name, :anyone_can_join, :creator_id, :team_id, :hidden
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
