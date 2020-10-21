@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :current_user_must_be_message_user, only: %i[edit update destroy]
+
   before_action :set_message, only: %i[show edit update destroy]
 
   def index
@@ -48,6 +50,13 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def current_user_must_be_message_user
+    set_message
+    unless current_user == @message.user
+      redirect_back fallback_location: root_path, alert: "You are not authorized for that."
+    end
+  end
 
   def set_message
     @message = Message.find(params[:id])

@@ -15,6 +15,12 @@
             Resources
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a href="/memberships" class="dropdown-item">
+              Memberships
+            </a>
+            <a href="/teams" class="dropdown-item">
+              Teams
+            </a>
             <a href="/topics" class="dropdown-item">
               Topics
             </a>
@@ -32,5 +38,32 @@
             </a>
           </div>
         </li>
+      </ul>
+      <ul class="navbar-nav">
+        <% if current_user.blank? %>
+          <li class="nav-item">
+            <a href="/users/sign_in" class="nav-link">
+              Sign in
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/users/sign_up" class="nav-link">
+              Sign up
+            </a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a href="/users/edit" class="nav-link">
+              Edit profile
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/users/sign_out" data-method="delete" class="nav-link">
+              Sign out
+            </a>
+          </li>
+        <% end %>
       </ul>
 </nav>

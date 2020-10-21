@@ -1,0 +1,26 @@
+<%= form_with(model: @room, local: true) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-check">
+    <%= f.check_box :anyone_can_join, class: "form-check-input" %>
+    <%= f.label :anyone_can_join, class: "form-check-label" %>
+  </div>
+
+  <%= f.hidden_field :creator_id, value: @user.id %>
+
+  <div class="form-group">
+    <%= f.label :team_id %>
+    <%= f.collection_select :team_id, Team.all, :id, :to_s, {}, class: "form-control" %>
+  </div>
+
+  <div class="form-check">
+    <%= f.check_box :hidden, class: "form-check-input" %>
+    <%= f.label :hidden, class: "form-check-label" %>
+  </div>
+
+  <%= f.submit "Create room", class: "btn btn-block btn-outline-secondary" %>
+<% end %>

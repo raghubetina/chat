@@ -24,22 +24,68 @@
     <% end %>
   </div>
   <div class="form-check">
-    <% open_to_public_class = "form-check-input" %>
-    <% open_to_public_was_invalid = room.errors.include?(:open_to_public) %>
+    <% anyone_can_join_class = "form-check-input" %>
+    <% anyone_can_join_was_invalid = room.errors.include?(:anyone_can_join) %>
 
     <% if was_validated %>
-      <% if open_to_public_was_invalid %>
-        <% open_to_public_class << " is-invalid" %>
+      <% if anyone_can_join_was_invalid %>
+        <% anyone_can_join_class << " is-invalid" %>
       <% else %>
-        <% open_to_public_class << " is-valid" %>
+        <% anyone_can_join_class << " is-valid" %>
       <% end %>
     <% end %>
 
-    <%= f.label :open_to_public, class: "form-check-label" do %>
-      <%= f.check_box :open_to_public, class: open_to_public_class %> Open to public
+    <%= f.label :anyone_can_join, class: "form-check-label" do %>
+      <%= f.check_box :anyone_can_join, class: anyone_can_join_class %> Anyone can join
     <% end %>
-    <% if open_to_public_was_invalid %>
-      <% room.errors.full_messages_for(:open_to_public).each do |message| %>
+    <% if anyone_can_join_was_invalid %>
+      <% room.errors.full_messages_for(:anyone_can_join).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= f.hidden_field :creator_id, value: current_user.id %>
+  <div class="form-group">
+    <% team_class = "form-control" %>
+    <% team_was_invalid = room.errors.include?(:team) %>
+
+    <% if was_validated %>
+      <% if team_was_invalid %>
+        <% team_class << " is-invalid" %>
+      <% else %>
+        <% team_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :team_id %>
+    <%= f.collection_select :team_id, Team.all, :id, :to_s, {}, class: "form-control" %>
+    <% if team_was_invalid %>
+      <% room.errors.full_messages_for(:team).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-check">
+    <% hidden_class = "form-check-input" %>
+    <% hidden_was_invalid = room.errors.include?(:hidden) %>
+
+    <% if was_validated %>
+      <% if hidden_was_invalid %>
+        <% hidden_class << " is-invalid" %>
+      <% else %>
+        <% hidden_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :hidden, class: "form-check-label" do %>
+      <%= f.check_box :hidden, class: hidden_class %> Hidden
+    <% end %>
+    <% if hidden_was_invalid %>
+      <% room.errors.full_messages_for(:hidden).each do |message| %>
         <div class="invalid-feedback d-flex">
           <%= message %>
         </div>
