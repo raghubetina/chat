@@ -7,6 +7,8 @@ class RoomResource < ApplicationResource
 
   # Direct associations
 
+  has_many   :topics
+
   # Indirect associations
 
 end
