@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
 
   def index
     @q = Room.ransack(params[:q])
-    @rooms = @q.result(distinct: true).includes(:topics).page(params[:page]).per(10)
+    @rooms = @q.result(distinct: true).includes(:creator, :topics, :team).page(params[:page]).per(10)
   end
 
   def show
@@ -20,7 +20,12 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
 
     if @room.save
-      redirect_to @room, notice: "Room was successfully created."
+      message = "Room was successfully created."
+      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referer, notice: message
+      else
+        redirect_to @room, notice: message
+      end
     else
       render :new
     end
@@ -36,7 +41,12 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.destroy
-    redirect_to rooms_url, notice: "Room was successfully destroyed."
+    message = "Room was successfully deleted."
+    if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+      redirect_back fallback_location: request.referer, notice: message
+    else
+      redirect_to rooms_url, notice: message
+    end
   end
 
   private
@@ -46,6 +56,6 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:name, :open_to_public)
+    params.require(:room).permit(:name, :anyone_can_join, :creator_id, :team_id, :hidden)
   end
 end

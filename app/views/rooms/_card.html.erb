@@ -8,8 +8,25 @@
       <dt>Name</dt>
       <dd><%= room.name %></dd>
 
-      <dt>Open to public</dt>
-      <dd><%= room.open_to_public %></dd>
+      <dt>Anyone can join</dt>
+      <dd><%= room.anyone_can_join %></dd>
+
+      <dt>Creator</dt>
+      <dd>
+        <% if @room.creator.present? %>
+          <%= link_to room.creator, room.creator %>
+        <% end %>
+      </dd>
+
+      <dt>Team</dt>
+      <dd>
+        <% if @room.team.present? %>
+          <%= link_to room.team, room.team %>
+        <% end %>
+      </dd>
+
+      <dt>Hidden</dt>
+      <dd><%= room.hidden %></dd>
 
     </dl>
 

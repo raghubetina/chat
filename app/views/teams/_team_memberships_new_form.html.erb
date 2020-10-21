@@ -1,0 +1,11 @@
+<%= form_with(model: @membership, local: true) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :user_id %>
+    <%= f.collection_select :user_id, User.all, :id, :to_s, {}, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :team_id, value: @team.id %>
+
+  <%= f.submit "Create membership", class: "btn btn-block btn-outline-secondary" %>
+<% end %>

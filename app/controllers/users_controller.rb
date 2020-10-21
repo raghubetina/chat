@@ -3,10 +3,12 @@ class UsersController < ApplicationController
 
   def index
     @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true).includes(:messages).page(params[:page]).per(10)
+    @users = @q.result(distinct: true).includes(:messages, :rooms, :memberships, :teams).page(params[:page]).per(10)
   end
 
   def show
+    @membership = Membership.new
+    @room = Room.new
     @message = Message.new
   end
 
