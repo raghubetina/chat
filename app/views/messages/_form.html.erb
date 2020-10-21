@@ -16,7 +16,7 @@
 
     <%= f.label :topic_id %>
     <!-- Input for topic_id start -->
-    <%= f.number_field :topic_id, class: topic_class, placeholder: "Enter topic" %>
+    <%= f.collection_select :topic_id, Topic.all, :id, :to_s, {}, class: "form-control" %>
     <!-- Input for topic_id end -->
     <% if topic_was_invalid %>
       <% message.errors.full_messages_for(:topic).each do |message| %>
