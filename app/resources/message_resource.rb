@@ -13,5 +13,4 @@ class MessageResource < ApplicationResource
   belongs_to :user
 
   # Indirect associations
-
 end

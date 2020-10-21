@@ -6,8 +6,7 @@ class UserResource < ApplicationResource
 
   # Direct associations
 
-  has_many   :messages
+  has_many :messages
 
   # Indirect associations
-
 end

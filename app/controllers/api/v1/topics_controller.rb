@@ -13,7 +13,7 @@ class Api::V1::TopicsController < Api::V1::GraphitiController
     topic = TopicResource.build(params)
 
     if topic.save
-      render jsonapi: topic, status: 201
+      render jsonapi: topic, status: :created
     else
       render jsonapi_errors: topic
     end
@@ -33,7 +33,7 @@ class Api::V1::TopicsController < Api::V1::GraphitiController
     topic = TopicResource.find(params)
 
     if topic.destroy
-      render jsonapi: { meta: {} }, status: 200
+      render jsonapi: { meta: {} }, status: :ok
     else
       render jsonapi_errors: topic
     end

@@ -1,10 +1,10 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :set_room, only: %i[show edit update destroy]
 
   # GET /rooms
   def index
     @q = Room.ransack(params[:q])
-    @rooms = @q.result(:distinct => true).includes(:topics).page(params[:page]).per(10)
+    @rooms = @q.result(distinct: true).includes(:topics).page(params[:page]).per(10)
   end
 
   # GET /rooms/1
@@ -18,15 +18,14 @@ class RoomsController < ApplicationController
   end
 
   # GET /rooms/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /rooms
   def create
     @room = Room.new(room_params)
 
     if @room.save
-      redirect_to @room, notice: 'Room was successfully created.'
+      redirect_to @room, notice: "Room was successfully created."
     else
       render :new
     end
@@ -35,7 +34,7 @@ class RoomsController < ApplicationController
   # PATCH/PUT /rooms/1
   def update
     if @room.update(room_params)
-      redirect_to @room, notice: 'Room was successfully updated.'
+      redirect_to @room, notice: "Room was successfully updated."
     else
       render :edit
     end
@@ -44,17 +43,18 @@ class RoomsController < ApplicationController
   # DELETE /rooms/1
   def destroy
     @room.destroy
-    redirect_to rooms_url, notice: 'Room was successfully destroyed.'
+    redirect_to rooms_url, notice: "Room was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_room
-      @room = Room.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def room_params
-      params.require(:room).permit(:name, :open_to_public)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_room
+    @room = Room.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def room_params
+    params.require(:room).permit(:name, :open_to_public)
+  end
 end

@@ -2,7 +2,7 @@ class Topic < ApplicationRecord
   # Direct associations
 
   has_many   :messages,
-             :dependent => :destroy
+             dependent: :destroy
 
   belongs_to :room
 
@@ -15,5 +15,4 @@ class Topic < ApplicationRecord
   def to_s
     room.to_s
   end
-
 end

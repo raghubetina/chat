@@ -12,5 +12,4 @@ class TopicResource < ApplicationResource
   belongs_to :room
 
   # Indirect associations
-
 end

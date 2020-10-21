@@ -2,7 +2,7 @@ class Room < ApplicationRecord
   # Direct associations
 
   has_many   :topics,
-             :dependent => :destroy
+             dependent: :destroy
 
   # Indirect associations
 
@@ -13,5 +13,4 @@ class Room < ApplicationRecord
   def to_s
     name
   end
-
 end

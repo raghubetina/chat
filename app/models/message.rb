@@ -14,5 +14,4 @@ class Message < ApplicationRecord
   def to_s
     topic.to_s
   end
-
 end
