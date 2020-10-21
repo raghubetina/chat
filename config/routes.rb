@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "users#index"
   resources :topics
   resources :messages
   resources :rooms
