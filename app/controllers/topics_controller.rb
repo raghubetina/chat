@@ -8,6 +8,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/1
   def show
+    @message = Message.new
   end
 
   # GET /topics/new
@@ -24,7 +25,12 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
 
     if @topic.save
-      redirect_to @topic, notice: 'Topic was successfully created.'
+      message = 'Topic was successfully created.'
+      if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referrer, notice: message
+      else
+        redirect_to @topic, notice: message
+      end
     else
       render :new
     end

@@ -8,6 +8,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   def show
+    @topic = Topic.new
   end
 
   # GET /rooms/new
